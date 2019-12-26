@@ -1,0 +1,13 @@
+{
+  "name": "charts",
+  "version": "1.0.0",
+  "description": "Example application showcasing how to use expose npm packages and  load them in a qooxdoo application using webpack and expose-loader.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "private": true,
+  "author": "",
+  "license": "ISC"
+}
