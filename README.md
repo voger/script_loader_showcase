@@ -59,6 +59,29 @@ Follow good practices. Use version control. Edit the file .gitignore and add `no
  $ git commit -m "Initial commit"
 ```
 
+For the sake of brevity all branching and merging steps will be ommited.
+They are good prectices though and should be followed.
 
+### Install needed libraries
+
+To use webpack we will need the following libraries
+
+```console
+ $ npm install --save-dev webpack webpack-cli expose-loader license-webpack-plugin uglifyjs-webpack-plugin
+```
+
+All are installed as development dependencies. *webpack-cli* is optional.
+
+To use amcharts we install that too as a development dependency
+
+```console
+  $ npm install --save-dev @amcharts/amcharts4
+```
+
+Also, amcharts recomends installing source-map-loader
+
+```console
+ $ npm install --save-dev source-map-loader
+```
 
 [amcharts]: https://www.amcharts.com
