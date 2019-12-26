@@ -67,7 +67,7 @@ They are good prectices though and should be followed.
 To use webpack we will need the following libraries
 
 ```console
- $ npm install --save-dev webpack expose-loader license-webpack-plugin uglifyjs-webpack-plugin
+ $ npm install --save-dev webpack webpack-clie expose-loader license-webpack-plugin uglifyjs-webpack-plugin
 ```
 
 All are installed as development dependencies.
@@ -82,8 +82,7 @@ Especially for building amcharts which is large library and
 it is written in typescript, we also install
 
 ```console
- $ npm install --save-dev source-map-loader @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import
-```
+  $ `npm install --save-dev source-map-loader @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import babel-loader``
 
 ### Configure webpack
 
@@ -125,7 +124,6 @@ our `webpack.config.js` file. This file is taken and modified from the [amcharts
 documentation][amwebpack].
 
 ```javascript
-
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin;
@@ -166,6 +164,19 @@ module.exports = {
     }]
   }
 }
+```
+
+### Expose the library
+
+Create the file `./source/resource/exposed.js` with this content
+```javascript
+require("expose-loader?amcharts4!@amcharts/amcharts4/core");
+```
+
+and run in the command line 
+
+```console
+ $ npx webpack-cli
 ```
 
 [amcharts]: https://www.amcharts.com
