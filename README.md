@@ -46,7 +46,7 @@ key
 }
 ```
 
-Follow good practices. Use version control. Edit the file .gitignore and add `node_modules/ 
+Follow good practices. Use version control. Edit the file .gitignore and add `node_modules/`
 
 ```shell
 # .gitignore template for skeleton-based apps
@@ -55,6 +55,8 @@ Follow good practices. Use version control. Edit the file .gitignore and add `no
 .package-cache.json
 /node_modules
 ```
+
+And then in the command line
 
 ```console
  $ git init
@@ -193,6 +195,8 @@ and run in the command line
 ```console
  $ npx webpack-cli
 ```
+
+This will create the files in `source/resource/js` folder.
 
 ### Use the library
 
