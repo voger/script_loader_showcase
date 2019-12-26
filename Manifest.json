@@ -1,5 +1,5 @@
 {
- "$schema": "https://raw.githubusercontent.com/qooxdoo/qooxdoo-compiler/master/source/resource/qx/tool/schema/Manifest-1-0-0.json",
+  "$schema": "https://raw.githubusercontent.com/qooxdoo/qooxdoo-compiler/master/source/resource/qx/tool/schema/Manifest-1-0-0.json",
   "info" :
   {
     "name" : "charts",
@@ -11,11 +11,11 @@
 
     "license" : "MIT license",
     "authors" : [
-  {
-    "name": "",
-    "email": ""
-  }
-],
+      {
+        "name": "",
+        "email": ""
+      }
+    ],
 
     "version" : "1.0.0"
   },
@@ -32,5 +32,11 @@
   "requires": {
     "@qooxdoo/framework": "^6.0.0-beta",
     "@qooxdoo/compiler" : "^1.0.0-beta"
+  },
+
+  "externalResources": {
+    "script": [
+      "js/amcharts/amcharts.js"
+    ]
   }
 }
