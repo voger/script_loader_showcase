@@ -67,10 +67,10 @@ They are good prectices though and should be followed.
 To use webpack we will need the following libraries
 
 ```console
- $ npm install --save-dev webpack webpack-cli expose-loader license-webpack-plugin uglifyjs-webpack-plugin
+ $ npm install --save-dev webpack expose-loader license-webpack-plugin uglifyjs-webpack-plugin
 ```
 
-All are installed as development dependencies. *webpack-cli* is optional.
+All are installed as development dependencies.
 
 To use amcharts we install that too as a development dependency
 
@@ -78,10 +78,95 @@ To use amcharts we install that too as a development dependency
   $ npm install --save-dev @amcharts/amcharts4
 ```
 
-Also, amcharts recomends installing source-map-loader
+Especially for building amcharts which is large library and
+it is written in typescript, we also install
 
 ```console
- $ npm install --save-dev source-map-loader
+ $ npm install --save-dev source-map-loader @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import
+```
+
+### Configure webpack
+
+Create in the root of the project a file named `webpack.config.js` 
+with the following content
+
+```javascript
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin;
+
+module.exports = {
+  mode: 'production',
+  entry: './source/resource/exposed.js',
+  output: {
+    filename: 'amcharts.js',
+    path: path.resolve(__dirname, './source/resource/js/amcharts.js')
+  },
+
+  plugins: [
+    new LicenseWebpackPlugin({addBanner: true})
+  ],
+
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  }
+}
+```
+
+* `entry` is the name of the javascript file that generates the exports
+* `outupt` is where the generated file wil be placed
+* we use the license-webpack-plugin to manage the various exported packages licanses
+* we minimize the build with the uglifyjs-webpack-plugin
+
+That will suffice for most simple and small libraries
+
+Since amcharts recommends using the source map loader plugin we modify
+our `webpack.config.js` file. This file is taken and modified from the [amcharts
+documentation][amwebpack].
+
+```javascript
+
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin;
+
+module.exports = {
+  mode: 'production',
+  entry: './source/resource/exposed.js',
+  devtool: "source-map",
+  output: {
+    filename: 'amcharts.js',
+    chunkFilename: "[name].js",
+    path: path.resolve(__dirname, './source/resource/js/amcharts.js')
+  },
+
+  plugins: [
+    new LicenseWebpackPlugin({addBanner: true})
+  ],
+
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
+
+  module: {
+    rules: [{
+      test: /\.js$/,
+      include: /node_modules/,
+      use: {
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env"],
+          plugins: ["@babel/plugin-syntax-dynamic-import"]
+        }
+      }
+    }, {
+      test: /.js$/,
+      use: ["source-map-loader"],
+      enforce: "pre"
+    }]
+  }
+}
 ```
 
 [amcharts]: https://www.amcharts.com
+[amwebpack]: https://www.amcharts.com/docs/v4/getting-started/integrations/using-webpack/
