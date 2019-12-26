@@ -9,7 +9,7 @@ module.exports = {
   output: {
     filename: 'amcharts.js',
     chunkFilename: "[name].js",
-    path: path.resolve(__dirname, './source/resource/js/amcharts.js')
+    path: path.resolve(__dirname, './source/resource/js/amcharts')
   },
 
   plugins: [
@@ -25,10 +25,13 @@ module.exports = {
       test: require.resolve('@amcharts/amcharts4/core'),
       use: [{
         loader: 'expose-loader',
-        options: 'amcharts'
-      },{
+        options: 'amchartsCore'
+      }]
+    },{ 
+      test: require.resolve('@amcharts/amcharts4/charts'),
+      use: [{
         loader: 'expose-loader',
-        options: 'amcharts'
+        options: 'amchartsCharts'
       }]
     }
       ,{
