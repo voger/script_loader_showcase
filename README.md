@@ -65,7 +65,7 @@ And then in the command line
 ```
 
 For the sake of brevity all branching and merging steps will be ommited.
-They are good prectices though and should be followed.
+They are good practices though and should be followed.
 
 ### Install needed libraries
 
