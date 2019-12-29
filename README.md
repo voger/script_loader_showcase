@@ -87,7 +87,7 @@ Especially for building amcharts which is large library and
 it is written in typescript, we also install
 
 ```console
-  $ `npm install --save-dev source-map-loader @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import babel-loader``
+  $ npm install --save-dev source-map-loader @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import babel-loader
 ```
 
 ### Configure webpack
@@ -157,11 +157,13 @@ module.exports = {
       test: require.resolve('@amcharts/amcharts4/core'),
       use: [{
         loader: 'expose-loader',
+        options: 'amchartsCore'
       }]
     },{ 
       test: require.resolve('@amcharts/amcharts4/charts'),
       use: [{
         loader: 'expose-loader',
+        options: 'amchartsCharts'
       }]
     }
       ,{
@@ -334,7 +336,11 @@ What is important to notice here is that the `am4core` and `am4charts`
 objects are exposed to our browser to use. This can be easily verified
 by going in the browser's console and trying to play with them.
 
-Finaly use our loaded file in our qooxdoo application. In `Application.js` 
+This is enough to make the library available to our application.
+
+### In case that the file is not served from our application but an external server 
+
+In `Application.js` 
 type the following 
 
 ```javascript
