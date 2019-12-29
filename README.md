@@ -189,7 +189,7 @@ module.exports = {
 
 Create the file `./source/resource/exposed.js` with this content
 ```javascript
-require("expose-loader?amcharts4!@amcharts/amcharts4/core");
+require("expose-loader?am4core!@amcharts/amcharts4/core");
 require("expose-loader?am4charts!@amcharts/amcharts4/charts");
 ```
 
