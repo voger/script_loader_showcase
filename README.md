@@ -120,7 +120,7 @@ module.exports = {
 
 * `entry` is the name of the javascript file that generates the exports
 * `outupt` is where the generated file wil be placed
-* we use the license-webpack-plugin to manage the various exported packages licanses
+* we use the license-webpack-plugin to manage the various exported packages licenses
 * we minimize the build with the uglifyjs-webpack-plugin
 
 That will suffice for most simple and small libraries
